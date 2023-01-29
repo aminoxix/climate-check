@@ -14,7 +14,7 @@ export default function AboutPage() {
         setCityData
       );
       // console.log(data);
-    });
+    }, console.error);
   }, []);
 
   return (

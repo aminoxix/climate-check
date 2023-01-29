@@ -71,4 +71,5 @@ const FlexRowCityData = styled.div`
 const WeatherImage = styled.img`
   width: 100px;
   height: 100px;
+  mix-blend-mode: soft-light;
 `;
