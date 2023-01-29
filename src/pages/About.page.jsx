@@ -13,7 +13,7 @@ export default function AboutPage() {
       fetchCityByPosition(data.coords.latitude, data.coords.longitude).then(
         setCityData
       );
-      console.log(data);
+      // console.log(data);
     });
   }, []);
 

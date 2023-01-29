@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const CityData = (props) => {
-  console.log(props);
-  if(props.cityData === null) return null;
+  // console.log(props);
+  if (props.cityData === null && props.CityData === undefined) return;
 
   return (
     <CityDataCard>

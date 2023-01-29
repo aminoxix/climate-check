@@ -2,12 +2,15 @@ const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 const WEATHER_ENDPOINT_URL = import.meta.env.VITE_WEATHER_ENDPOINT_URL;
 
 export async function fetchWeatherByCityName (cityName) {
+    
     const url = `${WEATHER_ENDPOINT_URL}?q=${cityName}&appid=${WEATHER_API_KEY}`;
 
     try {
         const response = await fetch(url);
         const data = await response.json();
-
+        if (data.coord === undefined) {
+            return;
+        }
         const latitude = data.coord.lat;
         const longitude = data.coord.lon;
         const name = data.name;
@@ -27,7 +30,7 @@ export async function fetchCityByPosition (latitude, longitude) {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data)
+        // console.log(data);
 
         const name = data.name;
         const weather = data.weather[0].description.toUpperCase();

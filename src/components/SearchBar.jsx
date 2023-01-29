@@ -14,12 +14,14 @@ export default function SearchBar(props) {
             type="text"
             value={cityName}
             onChange={(e) => setCityName(e.target.value)}
+            placeholder="Enter city name"
           />
           <SearchBarButton
             onClick={async (e) => {
               const data = await fetchWeatherByCityName(cityName);
               props.setCityData(data);
             }}
+            disabled={cityName === ""}
           >
             <LocationSearchingIcon />
           </SearchBarButton>
