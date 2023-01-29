@@ -14,10 +14,12 @@ export async function fetchWeatherByCityName (cityName) {
         const latitude = data.coord.lat;
         const longitude = data.coord.lon;
         const name = data.name;
+        const country = data.sys.country;
         const weather = data.weather[0].description.toUpperCase();
-        const temperature = data.main.temp;
+        const temperature = (data.main.temp - 273.15).toFixed(2);
+        const img = `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${data.weather[0].icon}.svg`;
         
-        return { latitude, longitude, name, weather, temperature };
+        return { latitude, longitude, name, country, weather, temperature, img };
     }
     catch (error) {
         console.log(error);
@@ -31,12 +33,18 @@ export async function fetchCityByPosition (latitude, longitude) {
         const response = await fetch(url);
         const data = await response.json();
         // console.log(data);
-
+        if (data.coord === undefined) {
+            return;
+        }
+        const latitude = data.coord.lat;
+        const longitude = data.coord.lon;
         const name = data.name;
+        const country = data.sys.country;
         const weather = data.weather[0].description.toUpperCase();
-        const temperature = data.main.temp;
+        const temperature = (data.main.temp - 273.15).toFixed(2);
+        const img = `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${data.weather[0].icon}.svg`;
 
-        return { latitude, longitude, name, weather, temperature };
+        return { latitude, longitude, name, country, weather, temperature, img };
     }
     catch (error) {
         console.log(error);

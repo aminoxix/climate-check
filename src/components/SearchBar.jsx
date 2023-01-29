@@ -13,13 +13,18 @@ export default function SearchBar(props) {
           <SearchBarInput
             type="text"
             value={cityName}
-            onChange={(e) => setCityName(e.target.value)}
+            onChange={(e) => setCityName(e.target.value || "")}
             placeholder="Enter city name"
           />
           <SearchBarButton
             onClick={async (e) => {
               const data = await fetchWeatherByCityName(cityName);
               props.setCityData(data);
+              if (data === undefined) {
+                return(
+                  alert("City not found, please try again.")
+                )
+              }
             }}
             disabled={cityName === ""}
           >
