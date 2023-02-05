@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { fetchCityByPosition } from "../libs/weather.util";
+
+// Components
 import CityData from "../components/CityData";
 import Footer from "../components/Footer";
 
+// Util
+import { fetchCityByPosition } from "../libs/weather.util";
+
+// Style
 import styled from "styled-components";
+
+// Context
+import { useDarkMode } from "../context/DarkModeContext";
 
 export default function AboutPage() {
   const [cityData, setCityData] = useState(null);
+
+  const { darkMode } = useDarkMode();
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((data) => {
@@ -22,7 +32,7 @@ export default function AboutPage() {
       {cityData ? (
         <CityData cityData={cityData} />
       ) : (
-        <AboutCard>
+        <AboutCard isDarkMode={darkMode}>
           You need to allow location access to see your current location.
         </AboutCard>
       )}

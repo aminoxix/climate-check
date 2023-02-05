@@ -1,4 +1,6 @@
 import React from 'react';
+
+// Style
 import styled from 'styled-components';
 
 const CityData = (props) => {
@@ -16,13 +18,13 @@ const CityData = (props) => {
             <CityDataHeader>Weather:</CityDataHeader> {props.cityData.weather}
           </CityDataList>
           <CityDataList>
-            <CityDataHeader>Longitude:</CityDataHeader> {props.cityData.longitude}
+            <CityDataHeader>Longitude:</CityDataHeader> {props.cityData.longitude} E
           </CityDataList>
           <CityDataList>
-            <CityDataHeader>Latitude:</CityDataHeader> {props.cityData.latitude}
+            <CityDataHeader>Latitude:</CityDataHeader> {props.cityData.latitude} N
           </CityDataList>
           <CityDataList>
-            <CityDataHeader>Temperature:</CityDataHeader> {props.cityData.temperature}
+            <CityDataHeader>Temperature:</CityDataHeader> {props.cityData.temperature}° C
           </CityDataList>
         </CityDataCard>
       </>

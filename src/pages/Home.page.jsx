@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+
+// Components
 import CityData from "../components/CityData";
 import Navbar from "../components/NavBar";
 import SearchBar from "../components/SearchBar";

@@ -1,38 +1,94 @@
-import React, { useState } from "react";
-import { fetchWeatherByCityName } from "../libs/weather.util";
+import React, { useState, useRef } from "react";
+import { StandaloneSearchBox, LoadScript } from "@react-google-maps/api";
 
+// Material UI
+import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
+
+// Utils
+import {
+  REACT_APP_GOOGLE_API_KEY,
+  fetchWeatherByCityName,
+} from "../libs/weather.util";
+
+// Styles
 import styled from "styled-components";
-import LocationSearchingIcon from '@mui/icons-material/LocationSearching';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 
 export default function SearchBar(props) {
-    const [cityName, setCityName] = useState("");
+  const [cityName, setCityName] = useState("");
+  const [openModal, setOpenModal] = useState(false);
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
 
-    return (
-      <>
-        <SearchBarContainer>
-          <SearchBarInput
-            type="text"
-            value={cityName}
-            onChange={(e) => setCityName(e.target.value || "")}
-            placeholder="Enter city name"
-          />
-          <SearchBarButton
-            onClick={async (e) => {
-              const data = await fetchWeatherByCityName(cityName);
-              props.setCityData(data);
-              if (data === undefined) {
-                return(
-                  alert("City not found, please try again.")
-                )
-              }
-            }}
-            disabled={cityName === ""}
+  const placesSDK = useRef();
+
+  const handlePlaceChanged = () => {
+    const [place] = placesSDK.current.getPlaces();
+    if (place) {
+      setCityName(place.formatted_address);
+    }
+  };
+
+  const style = {
+    position: 'absolute',
+    top: '20%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    borderRadius: "10px",
+    p: 4,
+    background: "linear-gradient(to right top, #A71D31 0%, #3F0D12 100%)"
+  };
+
+  return (
+    <>
+      <SearchBarContainer>
+        <LoadScript
+          googleMapsApiKey={REACT_APP_GOOGLE_API_KEY}
+          libraries={["places"]}
+        >
+          <StandaloneSearchBox
+            onLoad={(sdk) => (placesSDK.current = sdk)}
+            onPlacesChanged={handlePlaceChanged}
           >
-            <LocationSearchingIcon />
-          </SearchBarButton>
-        </SearchBarContainer>
-      </>
-    );
+            <SearchBarInput type="text" placeholder="Enter city name" />
+          </StandaloneSearchBox>
+        </LoadScript>
+        <SearchBarButton
+          onClick={async (e) => {
+            const data = await fetchWeatherByCityName(cityName);
+            props.setCityData(data);
+            if (data === undefined) {
+              return handleOpenModal();
+            }
+          }}
+          disabled={cityName === ""}
+        >
+          <LocationSearchingIcon />
+        </SearchBarButton>
+      </SearchBarContainer>
+      <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Err! Not Found
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          (Please try again with different location)
+          </Typography>
+        </Box>
+      </Modal>
+    </>
+  );
 }
 
 const SearchBarContainer = styled.div`
@@ -50,7 +106,8 @@ const SearchBarInput = styled.input`
   border: none;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1),
+    inset 0 0 1px rgba(255, 255, 255, 0.6);
   color: #ffffff;
   font-size: 1.2rem;
   font-weight: 600;
@@ -60,6 +117,7 @@ const SearchBarInput = styled.input`
 
 const SearchBarButton = styled.button`
   display: flex;
+  cursor: pointer;
   justify-content: center;
   align-items: center;
   margin-left: 10px;
@@ -67,7 +125,8 @@ const SearchBarButton = styled.button`
   border: none;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1),
+    inset 0 0 1px rgba(255, 255, 255, 0.6);
   color: #ffffff;
   font-size: 1.2rem;
   font-weight: 600;
@@ -76,7 +135,8 @@ const SearchBarButton = styled.button`
 
   &:hover {
     background: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1),
+      inset 0 0 1px rgba(255, 255, 255, 0.6);
     border-radius: 10px;
   }
 `;

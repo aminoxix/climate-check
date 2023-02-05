@@ -50,7 +50,7 @@ Wanna contribute to our project, but don't know how to start? Check out our [**c
  ┃ ┃ ┗ 📜 weather.util.js (openweathermap API fetcher)
  ┃ ┣ 📂 pages
  ┃ ┃ ┣ 📜 About.page.jsx
- ┃ ┃ ┣ 📜 Home.page.jsx
+ ┃ ┃ ┗ 📜 Home.page.jsx
  ┃ ┗ 📜 main.jsx 
  ┣ 📜 .gitignore
  ┣ 📜 .env (refer .env.example)
@@ -65,4 +65,4 @@ Wanna contribute to our project, but don't know how to start? Check out our [**c
 
 ## 📰 License
 
-> The **climate check** project is released under the [MIT license](https://github.com/aminoxix/ClimateCheck/blob/main/LICENSE). <br> Developed &amp; maintained by `aminos`. Copyright 2022 © aminos.
+> The **climate check** project is released under the [MIT license](https://github.com/aminoxix/ClimateCheck/blob/main/LICENSE). <br> Developed &amp; maintained by `aminos`. Copyright 2023 © aminos.
