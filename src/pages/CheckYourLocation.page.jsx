@@ -12,8 +12,9 @@ import styled from "styled-components";
 
 // Context
 import { useDarkMode } from "../context/DarkModeContext";
+import { CityHistoryProvider } from "../context/CityHistoryContext";
 
-export default function AboutPage() {
+export default function CheckYourLocation() {
   const [cityData, setCityData] = useState(null);
 
   const { darkMode } = useDarkMode();
@@ -30,18 +31,20 @@ export default function AboutPage() {
   return (
     <>
       {cityData ? (
-        <CityData cityData={cityData} />
+        <CityHistoryProvider>
+          <CityData cityData={cityData} />
+        </CityHistoryProvider>
       ) : (
-        <AboutCard isDarkMode={darkMode}>
+        <Card isDarkMode={darkMode}>
           You need to allow location access to see your current location.
-        </AboutCard>
+        </Card>
       )}
       <Footer />
     </>
   );
 }
 
-const AboutCard = styled.div`
+const Card = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

@@ -40,20 +40,24 @@ Wanna contribute to our project, but don't know how to start? Check out our [**c
  ┣ 📂 node_modules
  ┣ 📂 src
  ┃ ┣ 📂 assets
- ┃ ┃ ┗ 🖼 poster
+ ┃ ┃ ┗ 🖼 posters
  ┃ ┣ 📂 components
  ┃ ┃ ┣ 📜 NavBar.jsx
  ┃ ┃ ┣ 📜 SearchBar.jsx
- ┃ ┃ ┣ 📜 CityData.jsx (shared data component)
+ ┃ ┃ ┣ 📜 CityData.jsx (parent: shared data component)
+ ┃ ┃ ┣ 📜 CityInfoCard.jsx (child: shared data component)
  ┃ ┃ ┗ 📜 Footer.jsx
+ ┃ ┣ 📂 context
+ ┃ ┃ ┣ 📜 CityHistoryContext.jsx
+ ┃ ┃ ┗ 📜 DarkModeContext.jsx
  ┃ ┣ 📂 libs
  ┃ ┃ ┗ 📜 weather.util.js (openweathermap API fetcher)
  ┃ ┣ 📂 pages
- ┃ ┃ ┣ 📜 About.page.jsx
+ ┃ ┃ ┣ 📜 CheckYourLocation.page.jsx
  ┃ ┃ ┗ 📜 Home.page.jsx
  ┃ ┗ 📜 main.jsx 
  ┣ 📜 .gitignore
- ┣ 📜 .env (refer .env.example)
+ ┣ 📜 .env (refer `.env.example`)
  ┣ 📜 index.html
  ┣ 📜 pnpm-lock.yaml
  ┣ 📜 package.json

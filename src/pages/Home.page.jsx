@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 // Components
 import CityData from "../components/CityData";
@@ -7,7 +7,7 @@ import SearchBar from "../components/SearchBar";
 import Footer from "../components/Footer";
 
 // Context
-import { CityHistoryProvider } from "../context/CityHistory";
+import { CityHistoryProvider } from "../context/CityHistoryContext";
 
 export default function HomePage() {
 

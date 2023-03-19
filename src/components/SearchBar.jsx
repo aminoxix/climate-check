@@ -3,7 +3,7 @@ import { StandaloneSearchBox, LoadScript } from "@react-google-maps/api";
 
 // Material UI
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
-import WbTwilightIcon from '@mui/icons-material/WbTwilight';
+import WbTwilightIcon from "@mui/icons-material/WbTwilight";
 
 // Utils
 import {
@@ -13,12 +13,12 @@ import {
 
 // Styles
 import styled from "styled-components";
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
 
 // Context
-import { useCityHistory } from "../context/CityHistory";
+import { useCityHistory } from "../context/CityHistoryContext";
 
 export default function SearchBar() {
   const { addCity } = useCityHistory();
@@ -47,11 +47,12 @@ export default function SearchBar() {
             onLoad={(sdk) => (placesSDK.current = sdk)}
             onPlacesChanged={handlePlaceChanged}
           >
-            <SearchBarInput 
+            <SearchBarInput
               type="text"
               value={cityName}
               onChange={(e) => setCityName(e.target.value || "")}
-              placeholder="Enter city name" />
+              placeholder="Enter city name"
+            />
           </StandaloneSearchBox>
         </LoadScript>
         <SearchBarButton
@@ -80,7 +81,7 @@ export default function SearchBar() {
             Err! City Not Found <WbTwilightIcon />
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          (Click anywhere to close, or press ESC)
+            (Click anywhere to close, or press ESC)
           </Typography>
         </Box>
       </Modal>
@@ -89,18 +90,18 @@ export default function SearchBar() {
 }
 
 const style = {
-  position: 'absolute',
-  top: '20%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "20%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 360,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  bgcolor: "background.paper",
+  border: "2px solid #000",
   boxShadow: 24,
   borderRadius: "10px",
   p: 4,
   color: "#fff",
-  background: "linear-gradient(to right top, #A71D31 0%, #3F0D12 100%)"
+  background: "linear-gradient(to right top, #A71D31 0%, #3F0D12 100%)",
 };
 
 const SearchBarContainer = styled.div`
@@ -113,14 +114,14 @@ const SearchBarContainer = styled.div`
 
 const SearchBarInput = styled.input`
   width: 100%;
-  max-width: 400px;
+  max-width: 260px;
   padding: 10px 20px;
   border: none;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.2);
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.1),
     inset 0 0 1px rgba(255, 255, 255, 0.6);
-  color: #ffffff;
+  color: #fcfcfc;
   font-size: 1.2rem;
   font-weight: 600;
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);

@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Pages
 import HomePage from "./pages/Home.page";
-import AboutPage from "./pages/About.page";
+import CheckYourLocationPage from "./pages/CheckYourLocation.page";
 
 // Styles
 import styled, {
@@ -31,9 +31,11 @@ const GlobalStyle = injectGlobalStyle`
     padding: 10px;
     display: flex;
     place-items: center;
+    color: #ffffff;
+    
     place-content: center;
-    min-width: 100vw;
     min-height: 100vh;
+    min-width: 100vw;
     background: ${({ darkMode }) =>
       darkMode
         ? "linear-gradient(to right top, #04619F 0%, #000000 100%)"
@@ -47,8 +49,8 @@ const router = createBrowserRouter([
     element: <HomePage />,
   },
   {
-    path: "/about",
-    element: <AboutPage />,
+    path: "/check-your-location",
+    element: <CheckYourLocationPage />,
   },
 ]);
 

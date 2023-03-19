@@ -10,7 +10,9 @@ export default function NavBar() {
     <>
       <NavBarOverlay>
         <NavBarContainer>
-          <NavBarLink to="/about">About</NavBarLink>
+          <NavBarLink to="/check-your-location">
+            How 'bout yos climate??
+          </NavBarLink>
         </NavBarContainer>
       </NavBarOverlay>
     </>
@@ -18,7 +20,6 @@ export default function NavBar() {
 }
 
 const NavBarOverlay = styled.div`
-  max-width: 960px;
   mask-image: linear-gradient(
     90deg,
     rgba(255, 255, 255, 0) 0%,
@@ -28,6 +29,11 @@ const NavBarOverlay = styled.div`
   );
   margin: 0 auto;
   padding: 60px 0;
+  width: 960px;
+
+  @media (max-width: 768px) {
+    width: 360px;
+  }
 `;
 
 const NavBarContainer = styled.div`
