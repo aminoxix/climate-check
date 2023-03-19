@@ -3,18 +3,7 @@ import React, { useContext, createContext, useState } from "react";
 const CityHistoryContext = createContext();
 
 export function CityHistoryProvider(props) {
-  const [cityHistory, setCityHistory] = useState([
-    {
-      id: 1,
-      name: "Dummy",
-      country: "N.A.",
-      weather: "Dummy",
-      longitude: 0,
-      latitude: 0,
-      temperature: 0,
-      img: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/04n.svg",
-    },
-  ]);
+  const [cityHistory, setCityHistory] = useState([]);
   const addCity = (city) => {
     setCityHistory((history) => {
       for (let i in history) {
