@@ -13,7 +13,7 @@ export default function Footer() {
 
 const FooterContainer = styled.div`
   text-align: center;
-  padding: 20px 0;
+  padding: 60px 0;
   color: #ffffff;
   font-size: 1rem;
   font-weight: 600;

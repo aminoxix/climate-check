@@ -3,6 +3,7 @@ import { StandaloneSearchBox, LoadScript } from "@react-google-maps/api";
 
 // Material UI
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
+import WbTwilightIcon from '@mui/icons-material/WbTwilight';
 
 // Utils
 import {
@@ -16,7 +17,11 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
-export default function SearchBar(props) {
+// Context
+import { useCityHistory } from "../context/CityHistory";
+
+export default function SearchBar() {
+  const { addCity } = useCityHistory();
   const [cityName, setCityName] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const handleOpenModal = () => setOpenModal(true);
@@ -31,20 +36,6 @@ export default function SearchBar(props) {
     }
   };
 
-  const style = {
-    position: 'absolute',
-    top: '20%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    borderRadius: "10px",
-    p: 4,
-    background: "linear-gradient(to right top, #A71D31 0%, #3F0D12 100%)"
-  };
-
   return (
     <>
       <SearchBarContainer>
@@ -56,15 +47,21 @@ export default function SearchBar(props) {
             onLoad={(sdk) => (placesSDK.current = sdk)}
             onPlacesChanged={handlePlaceChanged}
           >
-            <SearchBarInput type="text" placeholder="Enter city name" />
+            <SearchBarInput 
+              type="text"
+              value={cityName}
+              onChange={(e) => setCityName(e.target.value || "")}
+              placeholder="Enter city name" />
           </StandaloneSearchBox>
         </LoadScript>
         <SearchBarButton
           onClick={async (e) => {
             const data = await fetchWeatherByCityName(cityName);
-            props.setCityData(data);
             if (data === undefined) {
               return handleOpenModal();
+            } else {
+              addCity(data);
+              setCityName("");
             }
           }}
           disabled={cityName === ""}
@@ -80,16 +77,31 @@ export default function SearchBar(props) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Err! Not Found
+            Err! City Not Found <WbTwilightIcon />
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          (Please try again with different location)
+          (Click anywhere to close, or press ESC)
           </Typography>
         </Box>
       </Modal>
     </>
   );
 }
+
+const style = {
+  position: 'absolute',
+  top: '20%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 360,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  borderRadius: "10px",
+  p: 4,
+  color: "#fff",
+  background: "linear-gradient(to right top, #A71D31 0%, #3F0D12 100%)"
+};
 
 const SearchBarContainer = styled.div`
   display: flex;

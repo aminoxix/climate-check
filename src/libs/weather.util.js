@@ -20,7 +20,7 @@ export async function fetchWeatherByCityName(cityName) {
     const temperature = (data.main.temp - 273.15).toFixed(2);
     const img = `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${data.weather[0].icon}.svg`;
 
-    return { latitude, longitude, name, country, weather, temperature, img };
+    return { id: cityName, latitude, longitude, name, country, weather, temperature, img };
   } catch (error) {
     console.log(error);
   }
